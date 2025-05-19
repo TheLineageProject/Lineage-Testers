@@ -1,103 +1,170 @@
-import Image from "next/image";
+"use client"
+import Navbar from "../components/Navbar";
+import Stepper from '@mui/material/Stepper';
+import Step from '@mui/material/Step';
+import StepLabel from '@mui/material/StepLabel';
+import { useState } from 'react';
+import EmailIcon from '@mui/icons-material/Email';
+import HourglassEmptyIcon from '@mui/icons-material/HourglassEmpty';
+import LinkIcon from '@mui/icons-material/Link';
+import DownloadIcon from '@mui/icons-material/Download';
+import { styled } from '@mui/material/styles';
+import type { StepIconProps as MuiStepIconProps } from '@mui/material/StepIcon';
+import StepConnector, { stepConnectorClasses } from '@mui/material/StepConnector';
+
+const steps = [
+  'Enter your email',
+  'Wait for response',
+  'Accept invitation',
+  'Download the app',
+];
+
+const StepIcons = [
+  EmailIcon,
+  HourglassEmptyIcon,
+  LinkIcon,
+  DownloadIcon,
+];
+
+// Custom gradient connector using MUI's StepConnector for proper alignment
+const GradientConnector = styled(StepConnector)(({ theme }) => ({
+  [`&.${stepConnectorClasses.alternativeLabel}`]: {
+    top: 22,
+  },
+  [`& .${stepConnectorClasses.line}`]: {
+    height: 3,
+    border: 0,
+    background: 'linear-gradient(90deg, #ff5e62 0%, #ff9966 100%)',
+    borderRadius: 1.5,
+  },
+}));
+
+// Type for StepIconProps
+interface StepIconProps extends MuiStepIconProps {}
+
+function CustomStepIcon(props: StepIconProps) {
+  const { active = false, completed = false, icon } = props;
+  const iconIndex = typeof icon === 'number' ? icon - 1 : 0;
+  const IconComponent = StepIcons[iconIndex];
+  return (
+    <div
+      style={{
+        background: completed || active
+          ? 'linear-gradient(135deg, #ff5e62 0%, #ff9966 100%)'
+          : '#e0e0e0',
+        color: completed || active ? '#fff' : '#757575',
+        borderRadius: '50%',
+        width: 40,
+        height: 40,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        fontSize: 24,
+        margin: '0 auto',
+        boxShadow: 'none',
+      }}
+    >
+      <IconComponent fontSize="inherit" />
+    </div>
+  );
+}
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const [activeStep, setActiveStep] = useState(0);
+  const [email, setEmail] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  async function handleEmailSubmit() {
+    setLoading(true);
+    setError('');
+    try {
+      const res = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          to: email,
+          subject: 'Thank you for joining the closed test!',
+          text: 'We are processing your request and will confirm soon. Thank you for your interest in testing our app!'
+        }),
+      });
+      if (!res.ok) throw new Error('Failed to submit');
+      setActiveStep(1);
+    } catch (err) {
+      setError('Failed to submit. Please try again.');
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  return (
+    <div className="min-h-screen bg-white flex flex-col items-center font-sans" style={{ fontFamily: 'Montserrat, var(--font-geist-sans), Arial, Helvetica, sans-serif' }}>
+      <Navbar />
+      <div className="w-full max-w-2xl mt-12">
+        <p className="text-center text-lg mb-8">
+          We are running a closed test for our app on Google Play. We are grateful for your interest and would love to have you join us as an early tester. Your feedback will help us make the app better for everyone!
+        </p>
+        <Stepper
+          activeStep={activeStep}
+          alternativeLabel
+          connector={<GradientConnector />}
+        >
+          {steps.map((label, index) => (
+            <Step key={label}>
+              <StepLabel
+                StepIconComponent={CustomStepIcon}
+                onClick={() => setActiveStep(index)}
+                style={{ cursor: 'pointer', color: activeStep === index ? '#ff5e62' : undefined }}
+              >
+                {label}
+              </StepLabel>
+            </Step>
+          ))}
+        </Stepper>
+        <div className="mt-12 p-8 bg-white rounded-lg text-center" style={{ boxShadow: 'none' }}>
+          {activeStep === 0 && (
+            <>
+              <h2 className="text-2xl font-bold mb-4">Enter your email to join the closed test</h2>
+              <input
+                type="email"
+                placeholder="Your email"
+                className="border border-gray-300 rounded px-4 py-2 w-full max-w-md mb-4"
+                value={email}
+                onChange={e => setEmail(e.target.value)}
+                disabled={loading}
+              />
+              <button
+                className="bg-gradient-to-r from-pink-500 to-orange-400 text-white px-6 py-2 rounded font-semibold ml-2"
+                onClick={handleEmailSubmit}
+                disabled={loading || !email}
+              >
+                {loading ? 'Submitting...' : 'Submit'}
+              </button>
+              {error && <div className="text-red-500 mt-2">{error}</div>}
+            </>
+          )}
+          {activeStep === 1 && (
+            <>
+              <h2 className="text-2xl font-bold mb-4">Wait for a response</h2>
+              <p className="mb-4">We are reviewing your request. You will receive an email if you are accepted.</p>
+            </>
+          )}
+          {activeStep === 2 && (
+            <>
+              <h2 className="text-2xl font-bold mb-4">Accept the invitation</h2>
+              <p className="mb-4">If you received an acceptance email, click the link below to accept the invitation:</p>
+              <a href="https://play.google.com/apps/testing/com.lineageproject.mobile" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline mb-4 block">Accept Invitation Link</a>
+            </>
+          )}
+          {activeStep === 3 && (
+            <>
+              <h2 className="text-2xl font-bold mb-4">Download the app</h2>
+              <p className="mb-4">You can now download and test the app from the Play Store:</p>
+              <a href="https://play.google.com/store/apps/details?id=com.lineageproject.mobile" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline mb-4 block">Go to Play Store</a>
+            </>
+          )}
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </div>
     </div>
   );
 }
