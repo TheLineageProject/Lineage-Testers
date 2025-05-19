@@ -99,7 +99,8 @@ export default function Home() {
       <Navbar />
       <div className="w-full max-w-2xl mt-12">
         <p className="text-center text-lg mb-8">
-          We are running a closed test for our app on Google Play. We are grateful for your interest and would love to have you join us as an early tester. Your feedback will help us make the app better for everyone!
+          We are running a closed test for our app on Google Play. We are grateful for your interest and would love to have you join us as an early tester. Your feedback will help us make the app better for everyone!. <br />
+          <b>THIS IS FOR ANDROID ONLY.</b>
         </p>
         <Stepper
           activeStep={activeStep}

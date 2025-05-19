@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "MyLINEAGE Closed Testing",
-  description: "MyLINEAGE Closed Testing",
+  title: "MyLINEAGE Closed Testing | Android only",
+  description: "MyLINEAGE Closed Testing | Android only",
 };
 
 export default function RootLayout({
