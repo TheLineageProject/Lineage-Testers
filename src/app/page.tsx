@@ -27,7 +27,7 @@ const StepIcons = [
 ];
 
 // Custom gradient connector using MUI's StepConnector for proper alignment
-const GradientConnector = styled(StepConnector)(({ theme }) => ({
+const GradientConnector = styled(StepConnector)({
   [`&.${stepConnectorClasses.alternativeLabel}`]: {
     top: 22,
   },
@@ -37,12 +37,9 @@ const GradientConnector = styled(StepConnector)(({ theme }) => ({
     background: 'linear-gradient(90deg, #ff5e62 0%, #ff9966 100%)',
     borderRadius: 1.5,
   },
-}));
+});
 
-// Type for StepIconProps
-interface StepIconProps extends MuiStepIconProps {}
-
-function CustomStepIcon(props: StepIconProps) {
+function CustomStepIcon(props: MuiStepIconProps) {
   const { active = false, completed = false, icon } = props;
   const iconIndex = typeof icon === 'number' ? icon - 1 : 0;
   const IconComponent = StepIcons[iconIndex];
@@ -84,13 +81,13 @@ export default function Home() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           to: email,
-          subject: 'Thank you for joining the closed test!',
-          text: 'We are processing your request and will confirm soon. Thank you for your interest in testing our app!'
+          subject: 'Thank you for joining the closed test!'
         }),
       });
       if (!res.ok) throw new Error('Failed to submit');
       setActiveStep(1);
     } catch (err) {
+      console.error(err);
       setError('Failed to submit. Please try again.');
     } finally {
       setLoading(false);

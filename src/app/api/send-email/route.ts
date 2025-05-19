@@ -16,7 +16,7 @@ if (!getApps().length) {
 const adminDb = getFirestore();
 
 export async function POST(req: Request) {
-  const { to, subject, text } = await req.json();
+  const { to, subject } = await req.json();
 
   try {
     // Save email to Firestore
