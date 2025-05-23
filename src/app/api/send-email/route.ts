@@ -17,17 +17,21 @@ if (!getApps().length) {
 const adminDb = getFirestore();
 
 export async function POST(req: Request) {
+  console.log('Received POST request.');
   const { to, subject } = await req.json();
+  console.log(`Payload received: to="${to}", subject="${subject}"`);
 
   try {
     // Save email to Firestore
+    console.log('Saving email to Firestore...');
     await adminDb.collection('testers').add({
       email: to,
       createdAt: new Date(),
       status: 'pending',
     });
-
+    console.log('Email saved to Firestore.');
     // Send confirmation email with logo
+    console.log('Setting up email transporter...');
     const transporter = nodemailer.createTransport({
       service: 'Gmail',
       auth: {
@@ -35,7 +39,9 @@ export async function POST(req: Request) {
         pass: process.env.MAIL_APP_PASSWORD,
       },
     });
+    console.log('Transporter configured.');
 
+    console.log('Sending confirmation email...');
     await transporter.sendMail({
       from: process.env.MAIL_USERNAME,
       to,
@@ -47,10 +53,11 @@ export async function POST(req: Request) {
         </div>
       `
     });
+    console.log('Email sent successfully.');
 
     return NextResponse.json({ message: 'Email saved and sent successfully' });
   } catch (error) {
-    console.error(error);
+    console.error('Error during POST processing:', error);
     return NextResponse.json({ message: 'Failed to save or send email' }, { status: 500 });
   }
 }
