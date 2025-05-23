@@ -55,7 +55,14 @@ export async function POST(req: Request) {
     });
     console.log('Email sent successfully.');
 
-    return NextResponse.json({ message: 'Email saved and sent successfully' });
+    return NextResponse.json({ 
+      message: 'Email saved and sent successfully',
+      details: {
+        email: to,
+        timestamp: new Date().toISOString(),
+        status: 'success'
+      }
+    });
   } catch (error) {
     console.error('Error during POST processing:', error);
     return NextResponse.json({ message: 'Failed to save or send email' }, { status: 500 });
