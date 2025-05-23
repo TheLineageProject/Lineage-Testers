@@ -13,6 +13,7 @@ if (!getApps().length) {
     }),
   });
 }
+
 const adminDb = getFirestore();
 
 export async function POST(req: Request) {
@@ -41,18 +42,10 @@ export async function POST(req: Request) {
       subject,
       html: `
         <div style="font-family: Montserrat, Arial, sans-serif; text-align: center;">
-          <img src="cid:footerlogo" alt="My Lineage Logo" style="height: 60px; margin-bottom: 16px;" />
           <h2 style="color: #ff5e62; margin-bottom: 8px;">Thank you for joining MyLINEAGE Closed Test!</h2>
           <p style="font-size: 16px; color: #222;">We have received your request and are processing it. You will receive another email soon to confirm your access.<br/><br/>We appreciate your interest and support!</p>
         </div>
-      `,
-      attachments: [
-        {
-          filename: 'footer-logo.png',
-          path: `${process.cwd()}/public/footer-logo.png`,
-          cid: 'footerlogo',
-        },
-      ],
+      `
     });
 
     return NextResponse.json({ message: 'Email saved and sent successfully' });
