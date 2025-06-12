@@ -198,52 +198,43 @@ export default function Home() {
         </div>
       </div>
 
-      <section className="relative min-h-screen bg-gradient-to-br from-purple-600 via-purple-700 to-purple-800 overflow-hidden">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-20">
-        <div className="absolute top-20 left-10 w-32 h-32 border border-white/20 rounded-full"></div>
-        <div className="absolute top-40 right-20 w-24 h-24 border border-white/20 rounded-full"></div>
-        <div className="absolute bottom-32 left-1/4 w-16 h-16 border border-white/20 rounded-full"></div>
-        <div className="absolute bottom-20 right-1/3 w-20 h-20 border border-white/20 rounded-full"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-40 h-40 border border-white/10 rounded-full"></div>
-      </div>
+      <section className="w-full bg-gradient-to-br from-purple-600 via-purple-700 to-purple-800 overflow-hidden py-16">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            {/* Left Content */}
+            <div className="text-white space-y-6">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
+                DISCOVER MY<br />
+                LINEAGE APP
+              </h1>
+              <p className="text-xl md:text-2xl text-purple-100 font-light">
+                Your Ultimate Tool To Build, Preserve,<br />
+                And Share Your Family Heritage.
+              </p>
+            </div>
 
-      <div className="relative z-10 container mx-auto px-4 py-16 lg:py-24">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          {/* Left Content */}
-          <div className="text-white space-y-6">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
-              DISCOVER MY<br />
-              LINEAGE APP
-            </h1>
-            <p className="text-xl md:text-2xl text-purple-100 font-light">
-              Your Ultimate Tool To Build, Preserve,<br />
-              And Share Your Family Heritage.
-            </p>
-          </div>
-
-          {/* Right Features Grid */}
-          <div className="grid grid-cols-2 gap-4 md:gap-6">
-            {features.map((feature, index) => (
-              <div
-                key={index}
-                className="bg-white/95 backdrop-blur-sm rounded-2xl p-6 text-center hover:bg-white transition-all duration-300 hover:shadow-xl hover:scale-105 group"
-              >
-                <div className="flex justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-                  {feature.icon}
+            {/* Right Features Grid */}
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
+              {features.map((feature, index) => (
+                <div
+                  key={index}
+                  className="bg-white/95 backdrop-blur-sm rounded-2xl p-6 text-center hover:bg-white transition-all duration-300 hover:shadow-xl hover:scale-105 group"
+                >
+                  <div className="flex justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                    {feature.icon}
+                  </div>
+                  <h3 className="font-semibold text-gray-800 text-sm md:text-base leading-tight">
+                    {feature.title}
+                  </h3>
+                  <p className="text-gray-600 text-sm md:text-base mt-1">
+                    {feature.subtitle}
+                  </p>
                 </div>
-                <h3 className="font-semibold text-gray-800 text-sm md:text-base leading-tight">
-                  {feature.title}
-                </h3>
-                <p className="text-gray-600 text-sm md:text-base mt-1">
-                  {feature.subtitle}
-                </p>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
-      </div>
-    </section>    
+      </section>
 
       {/* Why Join Section */}
       <div className="w-full bg-gray-50 py-16">
