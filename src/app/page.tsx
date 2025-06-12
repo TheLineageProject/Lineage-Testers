@@ -11,6 +11,18 @@ import DownloadIcon from '@mui/icons-material/Download';
 import { styled } from '@mui/material/styles';
 import type { StepIconProps as MuiStepIconProps } from '@mui/material/StepIcon';
 import StepConnector, { stepConnectorClasses } from '@mui/material/StepConnector';
+import { 
+  Users, 
+  Heart, 
+  HousePlug, 
+  Clock, 
+  Star, 
+  Theater, 
+  Play, 
+  Network, 
+  MapPin,
+  BookOpen
+} from 'lucide-react';
 
 const steps = [
   'Enter your email',
@@ -66,6 +78,59 @@ function CustomStepIcon(props: MuiStepIconProps) {
   );
 }
 
+const features = [
+  {
+    icon: <Users className="w-8 h-8 text-gray-700" />,
+    title: "Family Tree",
+    subtitle: "App"
+  },
+  {
+    icon: <Heart className="w-8 h-8 text-gray-700" />,
+    title: "Preserve Family",
+    subtitle: "History"
+  },
+  {
+    icon: <HousePlug className="w-8 h-8 text-gray-700" />,
+    title: "Online Family",
+    subtitle: "Networking"
+  },
+  {
+    icon: <Clock className="w-8 h-8 text-gray-700" />,
+    title: "Time Capsule",
+    subtitle: "Creations"
+  },
+  {
+    icon: <Star className="w-8 h-8 text-gray-700" />,
+    title: "Family Event",
+    subtitle: "Organizer"
+  },
+  {
+    icon: <Theater className="w-8 h-8 text-gray-700" />,
+    title: "Cultural Heritage",
+    subtitle: "Preservation"
+  },
+  {
+    icon: <Users className="w-8 h-8 text-gray-700" />,
+    title: "Digital Family",
+    subtitle: "Legacy"
+  },
+  {
+    icon: <Play className="w-8 h-8 text-gray-700" />,
+    title: "Family storytelling",
+    subtitle: "tools"
+  },
+  {
+    icon: <Network className="w-8 h-8 text-gray-700" />,
+    title: "Ancestral Origin",
+    subtitle: "Mapping"
+  },
+  {
+    icon: <BookOpen className="w-8 h-8 text-gray-700" />,
+    title: "Collaborative",
+    subtitle: "Family Chronicles"
+  }
+];
+
 export default function Home() {
   const [activeStep, setActiveStep] = useState(0);
   const [email, setEmail] = useState('');
@@ -97,10 +162,115 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-white flex flex-col items-center font-sans" style={{ fontFamily: 'Montserrat, var(--font-geist-sans), Arial, Helvetica, sans-serif' }}>
       <Navbar />
-      <div className="w-full max-w-2xl mt-12">
+      
+      {/* Hero Section */}
+      <div className="w-full bg-white py-20 flex flex-col md:flex-row items-center justify-center gap-8 px-4 md:px-12 md:py-20">
+        
+        <div className="flex-1 max-w-xl">
+          <h1 className="text-3xl md:text-5xl mb-6" style={{
+            background: 'linear-gradient(90deg, #a259ff 0%, #ff5e62 100%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text',
+            color: 'transparent',
+          }}>
+            CONNECT GENERATIONS FROM <br />MEMORIES TO LEGACY.
+          </h1>
+          <p className="text-lg md:text-lg mb-8 text-black">Transform Family Moments Into a Legacy & Creating Strong Bonds Between Past and Future</p>
+          <button
+            onClick={() => document.getElementById('waitlist')?.scrollIntoView({ behavior: 'smooth' })}
+            className="px-8 py-3 font-bold text-lg text-white"
+            style={{
+              background: 'linear-gradient(90deg, #ff9966 0%, #a259ff 100%)',
+              boxShadow: '0 2px 8px rgba(162,89,255,0.15)'
+            }}
+          >
+            JOIN WAITLIST
+          </button>
+        </div>
+        {/* Right: Image/Video Placeholder */}
+        <div className="flex-1 flex justify-center items-center">
+          <div className="overflow-hidden rounded-[40px_40px_120px_40px] border-4 border-purple-100 shadow-lg max-w-md w-full aspect-video bg-gradient-to-br from-purple-100 to-pink-100 flex items-center justify-center">
+            
+            <img src="/thumbnail.png" alt="Family playing" className="object-cover w-full h-full" />
+            {/* For video, you could use: <video src="/yourvideo.mp4" controls className="object-cover w-full h-full" /> */}
+          </div>
+        </div>
+      </div>
+
+      <section className="relative min-h-screen bg-gradient-to-br from-purple-600 via-purple-700 to-purple-800 overflow-hidden">
+      {/* Background Pattern */}
+      <div className="absolute inset-0 opacity-20">
+        <div className="absolute top-20 left-10 w-32 h-32 border border-white/20 rounded-full"></div>
+        <div className="absolute top-40 right-20 w-24 h-24 border border-white/20 rounded-full"></div>
+        <div className="absolute bottom-32 left-1/4 w-16 h-16 border border-white/20 rounded-full"></div>
+        <div className="absolute bottom-20 right-1/3 w-20 h-20 border border-white/20 rounded-full"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-40 h-40 border border-white/10 rounded-full"></div>
+      </div>
+
+      <div className="relative z-10 container mx-auto px-4 py-16 lg:py-24">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          {/* Left Content */}
+          <div className="text-white space-y-6">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
+              DISCOVER MY<br />
+              LINEAGE APP
+            </h1>
+            <p className="text-xl md:text-2xl text-purple-100 font-light">
+              Your Ultimate Tool To Build, Preserve,<br />
+              And Share Your Family Heritage.
+            </p>
+          </div>
+
+          {/* Right Features Grid */}
+          <div className="grid grid-cols-2 gap-4 md:gap-6">
+            {features.map((feature, index) => (
+              <div
+                key={index}
+                className="bg-white/95 backdrop-blur-sm rounded-2xl p-6 text-center hover:bg-white transition-all duration-300 hover:shadow-xl hover:scale-105 group"
+              >
+                <div className="flex justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                  {feature.icon}
+                </div>
+                <h3 className="font-semibold text-gray-800 text-sm md:text-base leading-tight">
+                  {feature.title}
+                </h3>
+                <p className="text-gray-600 text-sm md:text-base mt-1">
+                  {feature.subtitle}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>    
+
+      {/* Why Join Section */}
+      <div className="w-full bg-gray-50 py-16">
+        <div className="max-w-7xl mx-auto px-4">
+          <h2 className="text-3xl font-bold text-center mb-12">WHY JOIN</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[
+              "Deepen Family Bonds",
+              "Preserve Intangible Heritage",
+              "Bridge Geographical Distances",
+              "Celebrate Every Life",
+              "Preserve Unique Memories & Moments",
+              "Chronicle Every Voice"
+            ].map((reason, index) => (
+              <div key={index} className="text-center p-6">
+                <p className="text-lg font-semibold">{reason}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Waitlist Section */}
+      <div id="waitlist" className="w-full max-w-2xl mt-12 mb-20">
+        <h2 className="text-3xl font-bold text-center mb-8">RESERVE YOUR SPOT</h2>
         <p className="text-center text-lg mb-8">
-          We are running a closed test for our app on Google Play. We are grateful for your interest and would love to have you join us as an early tester. Your feedback will help us make the app better for everyone!. <br />
-          <b>THIS IS FOR ANDROID ONLY.</b>
+          Sign up today to gain early access and start building a legacy that spans generations.
         </p>
         <Stepper
           activeStep={activeStep}
@@ -122,7 +292,7 @@ export default function Home() {
         <div className="mt-12 p-8 bg-white rounded-lg text-center" style={{ boxShadow: 'none' }}>
           {activeStep === 0 && (
             <>
-              <h2 className="text-2xl font-bold mb-4">Enter your email to join the closed test</h2>
+              <h2 className="text-2xl font-bold mb-4">Enter your email to join the waitlist</h2>
               <input
                 type="email"
                 placeholder="Your email"
@@ -163,6 +333,18 @@ export default function Home() {
           )}
         </div>
       </div>
+
+      {/* Footer */}
+      <footer className="w-full bg-gray-900 text-white py-8">
+        <div className="max-w-7xl mx-auto px-4 text-center">
+          <p className="mb-4">Contact: hello@mylineage.co</p>
+          <div className="flex justify-center space-x-4 mb-4">
+            <a href="/privacy-policy" className="hover:text-pink-400">Privacy Policy</a>
+            <a href="/terms-of-service" className="hover:text-pink-400">Terms of Service</a>
+          </div>
+          <p>&copy; {new Date().getFullYear()} MyLineage. All rights reserved.</p>
+        </div>
+      </footer>
     </div>
   );
 }
