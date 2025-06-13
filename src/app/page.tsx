@@ -11,18 +11,8 @@ import DownloadIcon from '@mui/icons-material/Download';
 import { styled } from '@mui/material/styles';
 import type { StepIconProps as MuiStepIconProps } from '@mui/material/StepIcon';
 import StepConnector, { stepConnectorClasses } from '@mui/material/StepConnector';
-import { 
-  Users, 
-  Heart, 
-  HousePlug, 
-  Clock, 
-  Star, 
-  Theater, 
-  Play, 
-  Network, 
-  MapPin,
-  BookOpen
-} from 'lucide-react';
+import { Users, Heart, HousePlug, Clock, Star, Theater, Play, Network, BookOpen } from 'lucide-react';
+import WhyJoinReasons from '../components/WhyJoinReasons';
 
 const steps = [
   'Enter your email',
@@ -131,6 +121,39 @@ const features = [
   }
 ];
 
+const features2 = [
+  {
+    title: 'Family Tree',
+    subtitle: 'Easily create and customize your family tree with our intuitive interface. Add family members, link relationships, and update details as your family grows.',
+    img: '/tree-thumbnail.png',
+  },
+  {
+    title: 'Private Family Networking',
+    subtitle: "Securely connect with your family members through private messaging and shared spaces.Plan reunions, celebrate milestones, and stay updated with family affairs, all in one place.",
+    img: '/Frame-1977-1.png',
+  },
+  {
+    title: 'Secure and private Sharing',
+    subtitle: 'Share your family stories in a secure environment, with control over who can view and contribute to your narrative.',
+    img: '/chatimg.png',
+  },
+  {
+    title: 'Rich Storytelling Tools',
+    subtitle: "Capture and preserve your family's milestones through photos, videos, and stories. Our multimedia tools let you narrate your family's history in the most engaging way.",
+    img: '/story-telling-features.png',
+  },
+  {
+    title: 'Digital Time Capsules',
+    subtitle: 'Lock away precious memories and messages in digital time capsules to be discovered by future generations, ensuring your legacy lasts forever.',
+    img: '/digital-tiem.png',
+  },
+  {
+    title: 'Family Locator',
+    subtitle: 'See where your family members are and organize meetups easily. Privacy-first location sharing for peace of mind.',
+    img: '/mapfinder.png',
+  },
+];
+
 export default function Home() {
   const [activeStep, setActiveStep] = useState(0);
   const [email, setEmail] = useState('');
@@ -162,10 +185,10 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-white flex flex-col items-center font-sans" style={{ fontFamily: 'Montserrat, var(--font-geist-sans), Arial, Helvetica, sans-serif' }}>
       <Navbar />
-      
+
       {/* Hero Section */}
       <div className="w-full bg-white py-20 flex flex-col md:flex-row items-center justify-center gap-8 px-4 md:px-12 md:py-20">
-        
+
         <div className="flex-1 max-w-xl">
           <h1 className="text-3xl md:text-5xl mb-6" style={{
             background: 'linear-gradient(90deg, #a259ff 0%, #ff5e62 100%)',
@@ -190,16 +213,16 @@ export default function Home() {
         </div>
         {/* Right: Image/Video Placeholder */}
         <div className="flex-1 flex justify-center items-center">
-          <div className="overflow-hidden rounded-[40px_40px_120px_40px] border-4 border-purple-100 shadow-lg max-w-md w-full aspect-video bg-gradient-to-br from-purple-100 to-pink-100 flex items-center justify-center">
-            
-            <img src="/thumbnail.png" alt="Family playing" className="object-cover w-full h-full" />
-            {/* For video, you could use: <video src="/yourvideo.mp4" controls className="object-cover w-full h-full" /> */}
-          </div>
+          <img src="/thumbnail.png" alt="Family playing" className="object-cover w-full h-full" />
+          {/* For video, you could use: <video src="/yourvideo.mp4" controls className="object-cover w-full h-full" /> */}
         </div>
       </div>
 
-      <section className="w-full bg-gradient-to-br from-purple-600 via-purple-700 to-purple-800 overflow-hidden py-16">
-        <div className="max-w-7xl mx-auto px-4">
+      <section className="w-full bg-gradient-to-br from-purple-600 via-purple-700 to-purple-800 overflow-hidden py-16 relative">
+        <div className="absolute inset-0 w-full h-full opacity-20">
+          <img src="/blob-scatter-haikei.svg" alt="background pattern" className="w-full h-full object-cover" />
+        </div>
+        <div className="max-w-7xl mx-auto px-4 relative z-10">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             {/* Left Content */}
             <div className="text-white space-y-6">
@@ -236,26 +259,90 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Why Join Section */}
-      <div className="w-full bg-gray-50 py-16">
+      {/* Features Section (Timeline Style) */}
+      <section id="features" className="w-full bg-white py-24">
         <div className="max-w-7xl mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12">WHY JOIN</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              "Deepen Family Bonds",
-              "Preserve Intangible Heritage",
-              "Bridge Geographical Distances",
-              "Celebrate Every Life",
-              "Preserve Unique Memories & Moments",
-              "Chronicle Every Voice"
-            ].map((reason, index) => (
-              <div key={index} className="text-center p-6">
-                <p className="text-lg font-semibold">{reason}</p>
-              </div>
-            ))}
+          <h2 className="text-5xl font-bold text-center mb-16"
+            style={{
+              background: 'linear-gradient(90deg, #a259ff 0%, #ff5e62 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text', color: 'transparent'
+            }}>FEATURES</h2>
+          <div className="relative grid grid-cols-1 md:grid-cols-2 gap-16">
+            {/* Timeline vertical line */}
+            <div className="hidden md:block absolute left-1/2 top-0 h-full w-1 bg-gradient-to-b from-pink-400 via-purple-400 to-purple-700 z-0" style={{ transform: 'translateX(-50%)' }}></div>
+            {/* Left column */}
+            <div className="flex flex-col gap-24 relative z-10">
+              {features2.slice(0, 3).map((feature, i) => (
+                <div key={i} className="flex flex-col items-center gap-8 relative md:flex-col">
+                  <div>
+                    <h3 className="text-2xl font-bold mb-2">{feature.title}</h3>
+                    <p className="text-lg text-gray-700">{feature.subtitle}</p>
+                  </div>
+                  <img src={feature.img} alt={feature.title} className="w-92 h-92 object-cover max-w-xs md:max-w-full" />
+                </div>
+              ))}
+            </div>
+            {/* Right column */}
+            <div className="flex flex-col gap-24 relative z-10">
+              {features2.slice(3, 6).map((feature, i) => (
+                <div key={i} className="flex flex-col items-center gap-8 relative md:flex-col">
+                  {/* Dot on timeline */}
+                  <div className="hidden md:block absolute left-[-45px] top-1/2 transform -translate-y-1/2">
+                    <span className="block w-6 h-6 rounded-full bg-gradient-to-br from-pink-400 to-purple-600 border-4 border-white shadow-lg"></span>
+                  </div>
+                  <img src={feature.img} alt={feature.title} className="w-98 h-92 object-cover  max-w-xs md:max-w-full" />
+                  <div>
+                    <h3 className="text-2xl font-bold mb-2">{feature.title}</h3>
+                    <p className="text-lg text-gray-700">{feature.subtitle}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
-      </div>
+      </section>
+
+      {/* Deep Connections Section */}
+      <section className="w-full py-16 bg-[#f8f2fc] flex justify-center items-center">
+        <div className="max-w-6xl w-full mx-auto flex flex-col md:flex-row items-center gap-10 px-4 md:px-8 rounded-xl" style={{ background: 'rgba(248,242,252,0.7)' }}>
+          {/* Left Content */}
+          <div className="flex-1 flex flex-col justify-center items-start gap-6">
+            <h2 className="text-4xl md:text-5xl font-bold mb-2" style={{ background: 'linear-gradient(90deg, #ff5e62 0%, #3b82f6 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text', color: 'transparent' }}>DEEP CONNECTIONS</h2>
+            <h3 className="text-2xl md:text-3xl font-semibold mb-2 text-black">Transform the way you connect—</h3>
+            <p className="text-base md:text-lg text-gray-700 mb-4">Offering a private, secure space to share, collaborate, and celebrate every family milestone, from the extraordinary to the everyday.</p>
+            <button
+              className="px-8 py-3 font-bold text-lg mt-2"
+              style={{ background: 'linear-gradient(90deg, #ff9966 0%, #a259ff 100%)', color: 'white', boxShadow: '0 2px 8px rgba(162,89,255,0.15)' }}
+              onClick={() => document.getElementById('waitlist')?.scrollIntoView({ behavior: 'smooth' })}
+            >
+              JOIN WAITLIST
+            </button>
+          </div>
+          {/* Right Images Grid */}
+          <div className="flex-1 ">
+            <img src="/fam.png" alt="Family 1" className=" object-cover w-full h-full" />
+
+          </div>
+        </div>
+      </section>
+
+      {/* WHY JOIN Section */}
+      <section className="w-full py-24 bg-white flex flex-col justify-center items-center">
+        <h2 className="text-5xl font-bold text-center mb-4" style={{ background: 'linear-gradient(90deg, #a259ff 0%, #ff5e62 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text', color: 'transparent' }}>WHY JOIN</h2>
+        <h3 className="text-2xl md:text-3xl font-semibold text-center mb-12 text-black">Preserve Your Family's Past, Enrich Its Present, <br className='hidden md:block' />Secure Its Future</h3>
+        <div className="max-w-6xl w-full mx-auto flex flex-col md:flex-row items-center gap-12 px-4 md:px-8">
+          {/* Left Side: Reasons */}
+          <div className="flex-1 flex flex-col items-center">
+            <WhyJoinReasons />
+          </div>
+          {/* Right Side: Image */}
+          <div className="flex-1 flex justify-center items-center">
+            <img src="/tree.png" alt="Family Tree" className=" w-72 md:w-80 lg:w-96 h-auto mx-auto" />
+          </div>
+        </div>
+      </section>
 
       {/* Waitlist Section */}
       <div id="waitlist" className="w-full max-w-2xl mt-12 mb-20">
@@ -339,3 +426,4 @@ export default function Home() {
     </div>
   );
 }
+
