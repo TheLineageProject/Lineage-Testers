@@ -160,6 +160,7 @@ export default function Home() {
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [showVideo, setShowVideo] = useState(false);
 
   async function handleEmailSubmit() {
     setLoading(true);
@@ -188,7 +189,7 @@ export default function Home() {
       <Navbar />
 
       {/* Hero Section */}
-      <div className="w-full bg-white py-20 flex flex-col md:flex-row items-center justify-center gap-8 px-4 md:px-12 md:py-20">
+      <section id="hero" className="w-full bg-white py-20 flex flex-col md:flex-row items-center justify-center gap-8 px-4 md:px-12 md:py-20">
 
         <div className="flex-1 max-w-xl">
           <h1 className="text-3xl md:text-5xl mb-6" style={{
@@ -213,13 +214,49 @@ export default function Home() {
           </button>
         </div>
         {/* Right: Image/Video Placeholder */}
-        <div className="flex-1 flex justify-center items-center">
-          <img src="/thumbnail.png" alt="Family playing" className="object-cover w-full h-full" />
-          {/* For video, you could use: <video src="/yourvideo.mp4" controls className="object-cover w-full h-full" /> */}
+        <div className="flex-1 flex justify-center items-center relative">
+          <div className="overflow-hidden flex items-center justify-center relative">
+            <img src="/thumbnail.png" alt="Family playing" className="object-cover w-full h-full" />
+            {/* Play Button Overlay */}
+            <button
+              className="absolute inset-0 flex items-center justify-center focus:outline-none"
+              style={{ background: 'rgba(0,0,0,0.25)' }}
+              onClick={() => setShowVideo(true)}
+              aria-label="Play video"
+            >
+              <span className="bg-white bg-opacity-80 rounded-full p-4 shadow-lg hover:scale-110 transition-transform">
+                <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="24" cy="24" r="24" fill="#fff" fillOpacity="0.8"/>
+                  <polygon points="20,16 34,24 20,32" fill="#a259ff" />
+                </svg>
+              </span>
+            </button>
+          </div>
         </div>
-      </div>
+        {/* Video Overlay */}
+        {showVideo && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-80">
+            <div className="relative w-full h-full flex items-center justify-center">
+              <button
+                className="absolute top-6 right-8 z-50 text-white text-4xl font-bold hover:text-pink-300 focus:outline-none"
+                onClick={() => setShowVideo(false)}
+                aria-label="Close video"
+              >
+                &times;
+              </button>
+              <video
+                src="/video.mp4"
+                controls
+                autoPlay
+                className="rounded-2xl shadow-2xl max-w-3xl w-full h-auto bg-black"
+                style={{ maxHeight: '80vh' }}
+              />
+            </div>
+          </div>
+        )}
+      </section>
 
-      <section className="w-full bg-gradient-to-br from-purple-600 via-purple-700 to-purple-800 overflow-hidden py-16 relative">
+      <section id="about" className="w-full bg-gradient-to-br from-purple-600 via-purple-700 to-purple-800 overflow-hidden py-16 relative">
         <div className="absolute inset-0 w-full h-full opacity-20">
           <img src="/blob-scatter-haikei.svg" alt="background pattern" className="w-full h-full object-cover" />
         </div>
