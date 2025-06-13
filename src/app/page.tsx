@@ -450,14 +450,22 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="w-full bg-gray-900 text-white py-8">
-        <div className="max-w-7xl mx-auto px-4 text-center">
-          <p className="mb-4">Contact: hello@mylineage.co</p>
-          <div className="flex justify-center space-x-4 mb-4">
-            <a href="/privacy-policy" className="hover:text-pink-400">Privacy Policy</a>
-            <a href="/terms-of-service" className="hover:text-pink-400">Terms of Service</a>
+      <footer className="w-full bg-gradient-to-r from-pink-400 via-purple-500 to-orange-300 text-white py-10">
+        <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-6">
+          {/* Logo and Contact */}
+          <div className="flex flex-col md:flex-row items-center gap-4">
+            <img src="/footer-logo.png" alt="MyLineage Logo" className="h-10 w-auto" />
+            <span className="text-lg font-semibold">info@lineageproject.co</span>
           </div>
-          <p>&copy; {new Date().getFullYear()} MyLineage. All rights reserved.</p>
+          {/* Links */}
+          <div className="flex space-x-6 mt-4 md:mt-0">
+            <a href="https://lineageapp-f5488.web.app/" target="_blank" rel="noopener noreferrer" className="hover:text-yellow-200 transition">Privacy Policy</a>
+            <a href="https://lineagedata-d9c63.web.app/" target="_blank" rel="noopener noreferrer" className="hover:text-yellow-200 transition">Terms of Service</a>
+          </div>
+          {/* Copyright */}
+          <div className="text-center md:text-right text-sm mt-4 md:mt-0">
+            &copy; {new Date().getFullYear()} MyLineage. All rights reserved.
+          </div>
         </div>
       </footer>
     </div>
