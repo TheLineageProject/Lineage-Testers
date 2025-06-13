@@ -13,6 +13,7 @@ import type { StepIconProps as MuiStepIconProps } from '@mui/material/StepIcon';
 import StepConnector, { stepConnectorClasses } from '@mui/material/StepConnector';
 import { Users, Heart, HousePlug, Clock, Star, Theater, Play, Network, BookOpen } from 'lucide-react';
 import WhyJoinReasons from '../components/WhyJoinReasons';
+import FAQAccordion from '../components/FAQAccordion';
 
 const steps = [
   'Enter your email',
@@ -331,7 +332,7 @@ export default function Home() {
       {/* WHY JOIN Section */}
       <section className="w-full py-24 bg-white flex flex-col justify-center items-center">
         <h2 className="text-5xl font-bold text-center mb-4" style={{ background: 'linear-gradient(90deg, #a259ff 0%, #ff5e62 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text', color: 'transparent' }}>WHY JOIN</h2>
-        <h3 className="text-2xl md:text-3xl font-semibold text-center mb-12 text-black">Preserve Your Family's Past, Enrich Its Present, <br className='hidden md:block' />Secure Its Future</h3>
+        <h3 className="text-2xl md:text-3xl font-semibold text-center mb-12 text-black">Preserve Your Family&apos;s Past, Enrich Its Present, <br className='hidden md:block' />Secure Its Future</h3>
         <div className="max-w-6xl w-full mx-auto flex flex-col md:flex-row items-center gap-12 px-4 md:px-8">
           {/* Left Side: Reasons */}
           <div className="flex-1 flex flex-col items-center">
@@ -341,6 +342,33 @@ export default function Home() {
           <div className="flex-1 flex justify-center items-center">
             <img src="/tree.png" alt="Family Tree" className=" w-72 md:w-80 lg:w-96 h-auto mx-auto" />
           </div>
+        </div>
+      </section>
+
+      {/* Podcast Section */}
+      <section className="w-full py-16 bg-white flex flex-col items-center">
+        <h2 className="text-4xl md:text-5xl font-bold text-center mb-4" style={{background: 'linear-gradient(90deg, #1db954 0%, #a259ff 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text', color: 'transparent'}}>LISTEN TO OUR PODCAST</h2>
+        <p className="text-lg text-gray-700 text-center max-w-2xl mb-8">Discover more about the MyLineage App, its features, and the vision behind it. Listen to our podcast episodes and get inspired to preserve your family legacy!</p>
+        <a href="https://spotifycreators-web.app.link/e/AZVrggKpaUb" target="_blank" rel="noopener noreferrer" className="inline-block mb-10 px-8 py-3 font-bold text-lg rounded shadow-md" style={{background: 'linear-gradient(90deg, #1db954 0%, #a259ff 100%)', color: 'white'}}>Visit our Spotify Podcast</a>
+        <div className="flex flex-col md:flex-row gap-8 w-full max-w-4xl justify-center items-center">
+          {/* Podcast Episode 1 */}
+          <a href="https://open.spotify.com/episode/1b7ORU35K0Lui83vpGs1lx?si=-u5bBKNoTsi6gC5tafc9-g" target="_blank" rel="noopener noreferrer" className="flex-1 bg-gray-50 rounded-2xl p-6 flex flex-col items-center shadow hover:shadow-lg transition">
+            <div className="w-16 h-16 mb-4 flex items-center justify-center rounded-full bg-green-100">
+              <svg width="32" height="32" fill="currentColor" className="text-green-500" viewBox="0 0 20 20"><path d="M6.5 5.5v9l7-4.5-7-4.5z"/></svg>
+            </div>
+            <h3 className="text-xl font-bold mb-2 text-center">Intro Podcast</h3>
+            <p className="text-gray-600 text-center text-base mb-2">Learn how MyLineage helps families preserve and share memories across generations.</p>
+            <span className="text-green-600 font-semibold">Listen on Spotify</span>
+          </a>
+          {/* Podcast Episode 2 */}
+          <a href="https://open.spotify.com/episode/5OQ2q2kBd4F7xXyCNn6Rvg?si=EQqoCej-Sqml6Qsdx7bJKA" target="_blank" rel="noopener noreferrer" className="flex-1 bg-gray-50 rounded-2xl p-6 flex flex-col items-center shadow hover:shadow-lg transition">
+            <div className="w-16 h-16 mb-4 flex items-center justify-center rounded-full bg-green-100">
+              <svg width="32" height="32" fill="currentColor" className="text-green-500" viewBox="0 0 20 20"><path d="M6.5 5.5v9l7-4.5-7-4.5z"/></svg>
+            </div>
+            <h3 className="text-xl font-bold mb-2 text-center">The Family Tree Feature</h3>
+            <p className="text-gray-600 text-center text-base mb-2">Explore how the Family Tree feature connects generations and keeps memories alive.</p>
+            <span className="text-green-600 font-semibold">Listen on Spotify</span>
+          </a>
         </div>
       </section>
 
@@ -411,6 +439,15 @@ export default function Home() {
           )}
         </div>
       </div>
+
+      {/* FAQ Section */}
+      <section className="w-full py-24 bg-white flex flex-col items-center" id="faq">
+        <h2 className="text-5xl font-bold text-center mb-4">FAQs</h2>
+        <p className="text-lg text-gray-700 text-center mb-12">Dive Into The Details About Connecting Family Members Across Generations.</p>
+        <div className="w-full max-w-2xl mx-auto flex flex-col gap-4">
+          <FAQAccordion />
+        </div>
+      </section>
 
       {/* Footer */}
       <footer className="w-full bg-gray-900 text-white py-8">
