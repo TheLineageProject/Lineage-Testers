@@ -42,7 +42,7 @@ const Navbar = () => {
           boxShadow: '0 2px 8px rgba(162,89,255,0.15)'
         }}
       >
-        JOIN WAITLIST
+        GET EARLY ACCESS
       </a>
       {/* Hamburger for mobile */}
       <button
@@ -97,7 +97,7 @@ const Navbar = () => {
             }}
             onClick={() => setMenuOpen(false)}
           >
-            JOIN WAITLIST
+            GET EARLY ACCESS 
           </a>
         </div>
       </div>
