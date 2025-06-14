@@ -435,7 +435,7 @@ export default function Home() {
         <div className="mt-12 p-8 bg-white rounded-lg text-center" style={{ boxShadow: 'none' }}>
           {activeStep === 0 && (
             <>
-              <h2 className="text-2xl font-bold mb-4">Enter your email to join the waitlist</h2>
+              <h2 className="text-2xl font-bold mb-4">Enter your email to get early access </h2>
               <input
                 type="email"
                 placeholder="Your email"
