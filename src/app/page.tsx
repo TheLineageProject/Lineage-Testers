@@ -210,7 +210,7 @@ export default function Home() {
               boxShadow: '0 2px 8px rgba(162,89,255,0.15)'
             }}
           >
-            JOIN WAITLIST
+            GET EARLY ACCESS 
           </button>
         </div>
         {/* Right: Image/Video Placeholder */}
@@ -355,7 +355,7 @@ export default function Home() {
               style={{ background: 'linear-gradient(90deg, #ff9966 0%, #a259ff 100%)', color: 'white', boxShadow: '0 2px 8px rgba(162,89,255,0.15)' }}
               onClick={() => document.getElementById('waitlist')?.scrollIntoView({ behavior: 'smooth' })}
             >
-              JOIN WAITLIST
+              GET EARLY ACCESS 
             </button>
           </div>
           {/* Right Images Grid */}
